@@ -17,15 +17,19 @@ database.
 I.BAR
 - Attributes: BAR_ID (Primary Key), NAME, ADDRESS
 - Constraints: NAME and ADDRESS are unique.
+  
 II. BEER
 - Attributes: BEER_ID (Primary Key), NAME
 - Constraint: NAME is unique.
+  
 III.BREWER
 - Attributes: BREWER_ID (Primary Key), NAME, ADDRESS
 - Constraint: NAME is unique
+  
 IV.DRINKER
 - Attributes: DRINKER_ID (Primary Key), FNAME, LNAME, ADDRESS
 - Constraint: A combination of FNAME and LNAME is unique.
+  
 The bridge entities include SERVES, BREWS, VISITS, and LIKES, which establish
 relationships between the independent entities.
 ## DataPopulation
