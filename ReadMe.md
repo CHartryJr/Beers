@@ -6,9 +6,9 @@
 - [ActualSchema](#ActualSchema)
 - [Contributing](#contributing)
 
-Carl Hartry Jr Project 2(Beer.db) 4710 Databases
 
 ## Introduction
+Carl Hartry Jr Project 2(Beer.db) 4710 Databases
 The purpose of this project is to design and create a SQLite3 database for managing
 information related to bars, beers, brewers, and drinkers. The project includes the creation of
 tables for independent entities and bridge entities, as well as the population of data into the
