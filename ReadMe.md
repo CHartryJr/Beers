@@ -14,16 +14,16 @@ information related to bars, beers, brewers, and drinkers. The project includes 
 tables for independent entities and bridge entities, as well as the population of data into the
 database.
 ## DatabaseSchema
-I. BAR
+I.BAR
 - Attributes: BAR_ID (Primary Key), NAME, ADDRESS
 - Constraints: NAME and ADDRESS are unique.
 II. BEER
 - Attributes: BEER_ID (Primary Key), NAME
 - Constraint: NAME is unique.
-III. BREWER
+III.BREWER
 - Attributes: BREWER_ID (Primary Key), NAME, ADDRESS
 - Constraint: NAME is unique
-IV. DRINKER
+IV.DRINKER
 - Attributes: DRINKER_ID (Primary Key), FNAME, LNAME, ADDRESS
 - Constraint: A combination of FNAME and LNAME is unique.
 The bridge entities include SERVES, BREWS, VISITS, and LIKES, which establish
