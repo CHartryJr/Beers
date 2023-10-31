@@ -1,92 +1,96 @@
--- -- Write a query that returns the content of the Serves table.
--- -- Write another query that returns the content of the Serves table with the rows sorted by the beer
--- -- column. Display Table
+-- -- -- Write a query that returns the content of the Serves table.
+-- -- -- Write another query that returns the content of the Serves table with the rows sorted by the beer
+-- -- -- column. Display Table
 
-SELECT * FROM SERVES;
+-- SELECT * FROM SERVES;
 
- -- -- RESULT
--- SERVES_ID|BEER_SOLD|BAR_SELLING|PRICE
--- |1|1|2.5
--- |2|1|3
--- |1|2|2.25
--- |1|3|3.25
--- |2|3|1.5
--- |3|3|2.1
--- |4|3|0.5
-
-
--- -- Write a query that returns the kinds of beers served. There shouldn’t be any duplicates
--- -- Different Kinds of Beers Served
-
-SELECT DISTINCT NAME AS BEERS FROM BEER,SERVES WHERE BEER_ID = SERVES.BEER_SOLD;
-
--- -- RESULT
--- BEERS
--- Budweiser
--- Corona
--- Dixie
--- Miller Lite
+--  -- -- RESULT
+-- -- SERVES_ID|BEER_SOLD|BAR_SELLING|PRICE
+-- -- |1|1|2.5
+-- -- |2|1|3
+-- -- |1|2|2.25
+-- -- |1|3|3.25
+-- -- |2|3|1.5
+-- -- |3|3|2.1
+-- -- |4|3|0.5
 
 
--- -- Write a query that returns the beers served with a price below $2.75.
--- -- Cheaper Beers
+-- -- -- Write a query that returns the kinds of beers served. There shouldn’t be any duplicates
+-- -- -- Different Kinds of Beers Served
 
-SELECT DISTINCT NAME AS BEERS FROM BEER JOIN SERVES ON SERVES.BEER_SOLD = BEER.BEER_ID WHERE SERVES.PRICE < 2.75;
+-- SELECT DISTINCT NAME AS BEERS FROM BEER,SERVES WHERE BEER_ID = SERVES.BEER_SOLD;
 
--- -- RESULT
--- BEERS
--- Budweiser
--- Corona
--- Dixie
--- Miller Lite
-
-
--- -- Write a query that returns the addresses of the bars a specific drinker such as “Dan” frequents.
--- -- Find the Addresses of the Bars
-
-SELECT  B.ADDRESS FROM BAR B JOIN VISITS V ON B.BAR_ID = V.BAR_VISITED JOIN DRINKER D ON V.PERSON = D.DRINKER_ID WHERE D.FNAME = 'DAN';
-
--- -- RESULT
--- ADDRESS
--- 108 MORRIS STREET
--- 905 W.MAIN STREET
+-- -- -- RESULT
+-- -- BEERS
+-- -- Budweiser
+-- -- Corona
+-- -- Dixie
+-- -- Miller Lite
 
 
--- -- Write a query that returns the names of all bars that serve a particular beer such as “Dixie”.
--- -- Find the Names of Bars
+-- -- -- Write a query that returns the beers served with a price below $2.75.
+-- -- -- Cheaper Beers
 
-SELECT B.NAME AS BAR FROM BAR B JOIN SERVES S ON S.BAR_SELLING  = B.BAR_ID JOIN BEER ON  S.BEER_SOLD = BEER.BEER_ID WHERE BEER.NAME ='Dixie';   
+-- SELECT DISTINCT NAME AS BEERS FROM BEER JOIN SERVES ON SERVES.BEER_SOLD = BEER.BEER_ID WHERE SERVES.PRICE < 2.75;
 
--- -- RESULT
--- BAR
--- CLUB BOBCAT
-
-
--- -- Write a query that returns the drinkers who like one beer such as “Dixie” but not another beer such as “Corona”.
--- -- Find the Drinkers
-
-SELECT D.FNAME||' '||D.LNAME AS NAME FROM DRINKER AS D JOIN LIKES L ON L.BEER_CHOICE == B.BEER_ID JOIN BEER B ON L.PERSON == D.DRINKER_ID WHERE B.NAME ='Dixie'; 
-
--- -- Result
--- NAME
--- LARC YRTRAH
+-- -- -- RESULT
+-- -- BEERS
+-- -- Budweiser
+-- -- Corona
+-- -- Dixie
+-- -- Miller Lite
 
 
--- -- Write a query that finds pairs of bars (bar1 and bar2 should be different) that have the same price on at least one beer. Rows returned should look like: [bar1, bar2, beer].
--- -- Find Pairs of Bars
+-- -- -- Write a query that returns the addresses of the bars a specific drinker such as “Dan” frequents.
+-- -- -- Find the Addresses of the Bars
 
-SELECT B.NAME AS BAR1 ,B2.NAME AS BAR2 ,B2.BEER FROM (SELECT S.BEER_SOLD,S.PRICE,BAR.NAME FROM SERVES S JOIN BAR ON S.BEER_SOLD = BAR.BAR_ID) AS B  JOIN (SELECT  S2.BEER_SOLD ,S2.PRICE,BAR.NAME,BEER.NAME AS BEER FROM SERVES S2 JOIN BAR ON S2.BAR_SELLING = BAR.BAR_ID JOIN BEER ON S2.BEER_SOLD = BEER.BEER_ID) AS B2  ON B.PRICE = B2.PRICE AND B.BEER_SOLD != B2.BEER_SOLD;
+-- SELECT  B.ADDRESS FROM BAR B JOIN VISITS V ON B.BAR_ID = V.BAR_VISITED JOIN DRINKER D ON V.PERSON = D.DRINKER_ID WHERE D.FNAME = 'DAN';
 
--- -- Result
--- BAR1|BAR2|BEER
--- THE EDGE|SATISFACTION|Miller Lite
+-- -- -- RESULT
+-- -- ADDRESS
+-- -- 108 MORRIS STREET
+-- -- 905 W.MAIN STREET
 
 
--- -- Write a query that finds all drinkers who ONLY visit bars that serve a specific beer such as “Dixie”.
--- -- Find the Drinkers With Common Likes
+-- -- -- Write a query that returns the names of all bars that serve a particular beer such as “Dixie”.
+-- -- -- Find the Names of Bars
 
-SELECT DISTINCT D.FNAME||' '||D.LNAME AS DRINKER,BAR.NAME AS BAR FROM SERVES JOIN BEER B ON SERVES.BEER_SOLD = B.BEER_ID  JOIN BAR ON SERVES.BAR_SELLING = BAR.BAR_ID JOIN VISITS ON VISITS.BAR_VISITED = BAR.BAR_ID JOIN DRINKER D ON D.DRINKER_ID = VISITS.PERSON WHERE B.NAME = 'Dixie' GROUP BY BAR.NAME,D.FNAME;
+-- SELECT B.NAME AS BAR FROM BAR B JOIN SERVES S ON S.BAR_SELLING  = B.BAR_ID JOIN BEER ON  S.BEER_SOLD = BEER.BEER_ID WHERE BEER.NAME ='Dixie';   
 
--- -- Result
--- DRINKER|BAR
--- LARC YRTRAH|CLUB BOBCAT
+-- -- -- RESULT
+-- -- BAR
+-- -- CLUB BOBCAT
+
+
+-- -- -- Write a query that returns the drinkers who like one beer such as “Dixie” but not another beer such as “Corona”.
+-- -- -- Find the Drinkers
+
+-- SELECT DISTINCT D.*
+-- FROM DRINKER D JOIN 
+-- LIKES L ON D.DRINKER_ID = L.PERSON JOIN 
+-- BEER B ON L.BEER_CHOICE = B.BEER_ID 
+-- WHERE B.NAME ='Dixie' AND D.DRINKER_ID NOT IN 
+-- (SELECT L.PERSON FROM LIKES L JOIN BEER B ON L.BEER_CHOICE = B.BEER_ID WHERE B.NAME ='Corona');
+
+-- -- -- Result
+-- -- 
+
+
+-- -- -- Write a query that finds pairs of bars (bar1 and bar2 should be different) that have the same price on at least one beer. Rows returned should look like: [bar1, bar2, beer].
+-- -- -- Find Pairs of Bars
+
+-- SELECT B.NAME AS BAR1 ,B2.NAME AS BAR2 ,B2.BEER FROM (SELECT S.BEER_SOLD,S.PRICE,BAR.NAME FROM SERVES S JOIN BAR ON S.BEER_SOLD = BAR.BAR_ID) AS B  JOIN (SELECT  S2.BEER_SOLD ,S2.PRICE,BAR.NAME,BEER.NAME AS BEER FROM SERVES S2 JOIN BAR ON S2.BAR_SELLING = BAR.BAR_ID JOIN BEER ON S2.BEER_SOLD = BEER.BEER_ID) AS B2  ON B.PRICE = B2.PRICE AND B.BEER_SOLD != B2.BEER_SOLD;
+
+-- -- -- Result
+-- -- BAR1|BAR2|BEER
+-- -- THE EDGE|SATISFACTION|Miller Lite
+
+
+-- -- -- Write a query that finds all drinkers who ONLY visit bars that serve a specific beer such as “Dixie”.
+-- -- -- Find the Drinkers With Common Likes
+
+-- SELECT DISTINCT  D.FNAME||' '||D.LNAME AS NAME,D.ADDRESS  FROM SERVES JOIN BEER B ON SERVES.BEER_SOLD = B.BEER_ID  JOIN BAR ON SERVES.BAR_SELLING = BAR.BAR_ID JOIN VISITS ON VISITS.BAR_VISITED = BAR.BAR_ID JOIN DRINKER D ON D.DRINKER_ID = VISITS.PERSON WHERE B.NAME = 'Dixie' GROUP BY BAR.NAME,D.FNAME;
+
+-- -- -- Result
+-- -- DRINKER|BAR
+-- -- LARC YRTRAH|CLUB BOBCAT
