@@ -79,29 +79,48 @@ INSERT INTO BEER(NAME)  VALUES
     ('Budweiser'),
     ('Corona'),
     ('Dixie'),
-    ('Miller Lite');
+    ('Miller Lite'),
+    ('Mike');
 INSERT INTO BREWER(NAME,ADDRESS)  VALUES
     ('ANHEUSER-BUSCH INC.','6465 E Johns Crossing'),
     ('GRUPO MODELO','25207 Saltillo'),
-    ('DIXIE BREWING','5101 S Dixie Hwy');
+    ('DIXIE BREWING','5101 S Dixie Hwy'),
+    ('MIKE HESS BREWING','110 Federal St.');
 INSERT INTO DRINKER(FNAME,LNAME,ADDRESS)  VALUES
     ('AMY','BRANCH','100 W.MAIN STREET'),
     ('BEN','BENJERMAN','101 W.MAIN STREET'),
     ('DAN','DANGER','300 N.DUKE STREET'),
-    ('LARC','YRTRAH','211 BOBCAT STREET');
+    ('LARC','YRTRAH','211 BOBCAT STREET'),
+    ('JOHN','DOE','212 getDoe Blvd'),
+    ('JOANNA','DOE','212 getDoe Blvd'),
+    ('Mike','Kickbuttowski','212 getDoe Blvd'),
+    ('Luke','Skywalker','11 galaxy st.'),
+    ('Mike','Jones','8904 who st.'),
+    ('Salior','Moon','1030 the moon ave apt 2');
 -- Data population->dependent data
 INSERT INTO BREWS(PRODUCT,VENDER)  VALUES
     (1,1), --BUD X ANUHEUSER
     (2,2), -- CORONA X GRUPO
     (3,3), -- DIXIE X DIXIE.CO
-    (4,2); -- MILLER X GRUPO
+    (4,2), -- MILLER X GRUPO
+    (5,4); -- mike x mike
 INSERT INTO VISITS(PERSON,BAR_VISITED,TIMES_A_WEEK)  VALUES
     (2,2,2), -- BEN X SATIFY
     (3,1,1), -- DAN X EDGE
     (3,2,2), -- DAN X SATIFY
     (4,1,1), -- LARC X EDGE
     (4,2,2), -- LARC X SATIFY
-    (4,3,8); -- LARC X BOBCATS I THINK LARC HAS A PROBLEM
+    (4,3,8), -- LARC X BOBCATS I THINK LARC HAS A PROBLEM
+    (5,1,2), -- John X Edge
+    (5,2,3), --john x bobcat 
+    (6,2,3), --Jonana x Bobcat
+    (7,1,1), -- Mike xEdge
+    (7,2,20), -- Mike x satifcation
+    (8,1,1), --luke x edge
+    (8,2,1), -- luke x satfiy   
+    (8,3,1), -- luke x bobcat
+    (10,1,3), -- salior x edge 
+    (10,2,3); -- salior x bobcats
 INSERT INTO SERVES(BAR_SELLING,BEER_SOLD,PRICE)  VALUES
     (1,1,2.50), -- EDGE X BUD 
     (1,2,3.00), -- EDGE X CORONA
@@ -119,4 +138,12 @@ INSERT INTO LIKES(PERSON,BEER_CHOICE)  VALUES
     (4,1), -- LARC X BUD
     (4,2), -- LARC X CORONA
     (4,3), -- LARC X DIXIE
-    (4,4); -- LARC X MILLER IT IS PROVEN HE HAS A PROBLEM
+    (4,4), -- LARC X MILLER IT IS PROVEN HE HAS A PROBLEM
+    (5,2), -- John x Corona
+    (5,5), -- John x Mike
+    (6,4), -- Joana x Miller
+    (6,5), -- Joana x Mike
+    (7,3), -- mike  x Dixie
+    (9,5), -- jones x mike
+    (10,1),-- saloir x Bud
+    (10,5); -- salir x mike
